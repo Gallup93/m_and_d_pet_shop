@@ -1,0 +1,9 @@
+<h1><%= @shelter.name %></h1>
+<p><%= @shelter.address %></p>
+<p><%= @shelter.city %>, <%= @shelter.state %>,  <%= @shelter.zip %></p>
+<br>
+<%= link_to "Edit Shelter", "/shelters/#{@shelter.id}/edit" %><br>
+<%= link_to "Back to Shelters", "/shelters" %><br>
+<%= link_to "Delete Shelter", "/shelters/#{@shelter.id}", method: :delete %><br>
+<%= link_to "View Available Pets", "/shelters/#{@shelter.id}/pets" %><br>
+
