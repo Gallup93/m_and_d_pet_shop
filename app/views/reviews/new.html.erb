@@ -1,6 +1,6 @@
 <h1>Add A New Review</h1>
 
-<%= form_tag "/shelters/#{@shelter.id}/reviews/new" do %>
+<%= form_tag "/shelters/#{@shelter.id}/reviews" do %>
     <%= label_tag :title %>
     <%= text_field_tag :title %><br>
     <%= label_tag :rating %>
