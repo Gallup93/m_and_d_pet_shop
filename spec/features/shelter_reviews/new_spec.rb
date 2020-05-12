@@ -8,6 +8,8 @@ RSpec.describe "linked from shelters show to reviews new page" do
 
         visit "/shelters/#{shelter1.id}"
 
+        expect(current_path).to eq("/shelters/#{shelter1.id}")
+
         click_link "Add Review"
 
         expect(current_path).to eq("/shelters/#{shelter1.id}/reviews/new")
