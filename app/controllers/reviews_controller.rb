@@ -4,7 +4,6 @@ class ReviewsController < ApplicationController
   end
 
   def create
-
     shelter = Shelter.find(params[:id])
     review = shelter.reviews.new(review_params)
 
@@ -14,6 +13,9 @@ class ReviewsController < ApplicationController
       flash[:notice] = "Form Error: please include a title, rating, and content"
       redirect_to "/shelters/#{shelter.id}/reviews/new"
     end
+  end
+
+  def edit
   end
 
   private
