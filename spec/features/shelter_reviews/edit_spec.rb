@@ -44,7 +44,7 @@ RSpec.describe "review edit page" do
 
     visit "/shelters/#{shelter1.id}/#{review.id}/edit"
 
-    fill_in :title,	with: "BIG MAD"
+    fill_in :title,	with: "BIGGER MAD"
     fill_in :rating, with: ""
     fill_in :content,	with: "angry words"
     fill_in :image,	with: "https://www.freeimages.com/photo/face-mad-1511390"
@@ -53,6 +53,8 @@ RSpec.describe "review edit page" do
 
     expect(current_path).to eq("/shelters/#{shelter1.id}/#{review.id}/edit")
     expect(page).to have_content("Form Error: please include a title, rating, and content")
+    expect(page).to_not have_content("BIGGER MAD")
+
   end
 end
 
