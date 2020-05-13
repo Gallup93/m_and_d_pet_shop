@@ -23,6 +23,7 @@ RSpec.describe "shelter reviews" do
         expect(page).to have_content(@review1.rating)
         expect(page).to have_content(@review1.content)
         expect(page).to have_css("img[src*='#{@review1.image}']")
+        expect(page).to have_link("Edit Review")
       end
 
       within ".review-#{@review2.id}" do
@@ -30,6 +31,7 @@ RSpec.describe "shelter reviews" do
         expect(page).to have_content(@review2.rating)
         expect(page).to have_content(@review2.content)
         expect(page).to have_css("img[src*='#{@review2.image}']")
+        expect(page).to have_link("Edit Review")
       end
     end
   end
