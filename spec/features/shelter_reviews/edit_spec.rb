@@ -34,6 +34,26 @@ RSpec.describe "review edit page" do
         expect(subject).to_not have_content("angry words")
     end
   end
+
+  it "wont update without required form fields" do
+    shelter1 = Shelter.create(name: "Randys Rodent Ranch", address: "555 Hamster Ave", city: "Richmond", state: "VA", zip: "12345")
+    review = shelter1.reviews.create(title: "BIG MAD",
+                                rating: 1,
+                                content: "angry words",
+                                image: "https://www.freeimages.com/photo/face-mad-1511390")
+
+    visit "/shelters/#{shelter1.id}/#{review.id}/edit"
+
+    fill_in :title,	with: "BIG MAD"
+    fill_in :rating, with: ""
+    fill_in :content,	with: "angry words"
+    fill_in :image,	with: "https://www.freeimages.com/photo/face-mad-1511390"
+
+    click_button "Update Review"
+
+    expect(current_path).to eq("/shelters/#{shelter1.id}/#{review.id}/edit")
+    expect(page).to have_content("Form Error: please include a title, rating, and content")
+  end
 end
 
 # When I click on this link, I am taken to an edit shelter review path

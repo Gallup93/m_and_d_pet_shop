@@ -21,8 +21,12 @@ class ReviewsController < ApplicationController
 
   def update
     review = Review.find(params[:review_id])
-    review.update(review_params)
-    redirect_to "/shelters/#{params[:id]}"
+    if review.update(review_params)
+      redirect_to "/shelters/#{params[:id]}"
+    else
+      flash[:notice] = "Form Error: please include a title, rating, and content"
+      redirect_to "/shelters/#{params[:id]}/#{params[:review_id]}/edit"
+    end
   end
 
   def destroy
