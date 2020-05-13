@@ -28,7 +28,7 @@ RSpec.describe "review edit page" do
         expect(page).to have_content("STILL BIG MAD")
         expect(page).to have_content(1)
         expect(page).to have_content("EVEN BIGGER MAD")
-        expect(page).to have_content("https://www.freeimages.com/photo/face-mad-1511390")
+        have_css("img[src*='https://www.freeimages.com/photo/face-mad-1511390']")
 
         expect(subject).to_not have_content("BIG MAD")
         expect(subject).to_not have_content("angry words")
