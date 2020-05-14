@@ -39,7 +39,5 @@ RSpec.describe Favorites do
       expect(subject.find_fav_pet(pet)).to eq(@pet1) 
     end
   end
-  
-  
   end
 end

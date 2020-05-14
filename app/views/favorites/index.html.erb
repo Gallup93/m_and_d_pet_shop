@@ -5,7 +5,8 @@
   <% else %>
     <% favorites.contents.each do |pet| %>
       <section class= "fav_pets-<%= pet %>"> 
-      <h3><%= link_to favorites.find_fav_pet(pet).name, "/pets/#{favorites.find_fav_pet(pet).id}" %></h3>
-      <img style="width:40vw" src="<%= favorites.find_fav_pet(pet).image %>">
-      <% end %>
+        <h3><%= link_to favorites.find_fav_pet(pet).name, "/pets/#{favorites.find_fav_pet(pet).id}" %></h3>
+        <img style="width:40vw" src="<%= favorites.find_fav_pet(pet).image %>"><hr>
+      </section>
     <% end %>
+  <% end %>
