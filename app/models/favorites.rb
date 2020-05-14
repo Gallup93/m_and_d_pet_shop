@@ -17,6 +17,14 @@ class Favorites
     Pet.find(pet_id.to_i)
   end
   
+  def delete_fav_pet(pet_id)
+    @contents.delete(pet_id.to_s)
+  end
+  
+  def favorite?(pet_id)
+    @contents.include?(pet_id.to_s)
+  end
+  
   
 
 end

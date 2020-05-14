@@ -6,6 +6,11 @@
 <p>Adoption Status: <%= @pet.adoptable? %></p><br>
 <%= link_to 'Update Pet Info', "/pets/#{@pet.id}/edit" %><br>
 <%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete %><br>
-<%= button_to "Add to your Favorites", "/favorites/#{@pet.id}", method: :patch %>
+<% if favorites.favorite?(@pet.id) %>
+<%= button_to "Remove from Favorites", "/favorites/#{@pet.id}", method: :delete %><br>
+  <% else %>
+<%= button_to "Add to your Favorites", "/favorites/#{@pet.id}", method: :patch %><br>
+<% end %>
+
 
 
