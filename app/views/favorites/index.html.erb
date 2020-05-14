@@ -1,0 +1,12 @@
+<h1>Favorite Pets</h1>
+
+  <% if favorites.total_count == 0 %>
+    <h3>You have not selected any favorite pets!</h3>
+  <% else %>
+    <% favorites.contents.each do |pet| %>
+      <section class= "fav_pets-<%= pet %>"> 
+        <h3><%= link_to favorites.find_fav_pet(pet).name, "/pets/#{favorites.find_fav_pet(pet).id}" %></h3>
+        <img style="width:40vw" src="<%= favorites.find_fav_pet(pet).image %>"><hr>
+      </section>
+    <% end %>
+  <% end %>
