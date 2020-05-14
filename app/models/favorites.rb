@@ -13,6 +13,10 @@ class Favorites
     @contents << pet_id.to_s
   end
   
+  def find_fav_pet(pet_id)
+    Pet.find(pet_id.to_i)
+  end
+  
   
 
 end

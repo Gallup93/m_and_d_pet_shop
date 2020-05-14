@@ -30,6 +30,16 @@ RSpec.describe Favorites do
       expect(subject.contents).to eq([@pet1.id.to_s, @pet2.id.to_s]) 
     end
   end
+
+  describe "#find_fav_pet" do
+    it "can find pet through favorite contents" do
+      subject.add_pet(@pet1.id)
+      subject.add_pet(@pet2.id)
+      pet = subject.contents[0].to_i
+      expect(subject.find_fav_pet(pet)).to eq(@pet1) 
+    end
+  end
+  
   
   end
 end
