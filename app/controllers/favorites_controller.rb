@@ -25,9 +25,13 @@ class FavoritesController < ApplicationController
     favorites.delete_fav_pet(pet.id)
     redirect_to "/favorites"
   end
-  
-  
 
+  def destroy_all
+    favorites.contents.clear
+    redirect_to "/favorites"
+  end
+  
+  
   # def fav_collection
 
   # end
