@@ -12,7 +12,13 @@
     <nav>
       <%= link_to "Back to Shelters", "/shelters" %>
       <%= link_to "Pets Index", "/pets" %>
+      <%= link_to "Favorites: #{favorites.total_count} ", "/favorites" %>
     </nav>
+    <% flash.each do |type, message| %>
+    <section class=<%= type %>>
+      <p><%= message %></p>
+    </section>
+<% end %>
     <%= yield %>
   </body>
 </html>
