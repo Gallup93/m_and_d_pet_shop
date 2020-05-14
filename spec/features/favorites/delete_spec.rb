@@ -84,12 +84,5 @@ RSpec.describe "remove favorites" do
     end
   end
 end
-# As a visitor
-# When I have added pets to my favorites list
-# And I visit my favorites page ("/favorites")
-# I see a link to remove all favorited pets
-# When I click that link
-# I'm redirected back to the favorites page
-# I see the text saying that I have no favorited pets
-# And the favorites indicator returns to 0
+
 

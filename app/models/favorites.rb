@@ -24,7 +24,4 @@ class Favorites
   def favorite?(pet_id)
     @contents.include?(pet_id.to_s)
   end
-  
-  
-
 end
