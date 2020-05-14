@@ -11,6 +11,8 @@
 
 <% @shelter.reviews.each do |review| %>
   <section class="review-<%= review.id %>">
+    <%= link_to "Edit Review", "/shelters/#{@shelter.id}/#{review.id}/edit" %><br>
+    <%= link_to "Delete Review", "/shelters/#{@shelter.id}/#{review.id}/delete" %><br>
     <h3><%= review.title %></h3>
     <p><%= review.rating %><p><br>
     <p><%= review.content %><p><br>
@@ -18,3 +20,4 @@
   </section>
 <% end %>
 
+<%= link_to "Add Review", "/shelters/#{@shelter.id}/reviews/new" %><br>
