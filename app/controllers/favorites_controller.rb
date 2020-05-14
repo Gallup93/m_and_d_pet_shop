@@ -1,7 +1,7 @@
 class FavoritesController < ApplicationController
 
   def index
-    # binding.pry
+    
   end
   
 
