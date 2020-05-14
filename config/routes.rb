@@ -20,4 +20,12 @@ Rails.application.routes.draw do
   patch '/pets/:pet_id', to: 'pets#update'
   get '/shelters/:shelter_id/pets', to: 'shelter_pets#index'
   delete '/pets/:pet_id', to: 'pets#destroy'
+
+  #reviews
+  get '/shelters/:id/reviews/new', to: 'reviews#new'
+  # get '/shelters/:id/reviews', to: 'reviews#new'
+  get 'shelters/:id/:review_id/edit', to: 'reviews#edit'
+  get '/shelters/:id/:review_id/delete', to: 'reviews#destroy'
+  post '/shelters/:id/reviews', to: 'reviews#create'
+  patch '/shelters/:id/:review_id/update', to: 'reviews#update'
 end

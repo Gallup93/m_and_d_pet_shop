@@ -71,3 +71,12 @@ s4_pet3 = shelter4.pets.create(name: "Sarah",
                                     sex: "female",
                                     description: "Not ideal for your pool")
 
+review1 = shelter1.reviews.create(title: "Bad Store", 
+                                    rating: 1, 
+                                    content: "stole my money",
+                                    image: "https://images.freeimages.com/images/large-previews/3d7/stubbed-toe-or-forgotten-briefcase-1194346.jpg")
+review2 = shelter1.reviews.create(title: "Good Store", 
+                                    rating: 5, 
+                                    content: "gave me money",
+                                    image: "https://images.freeimages.com/images/large-previews/c87/stig-1564940.jpg")                                    
+
