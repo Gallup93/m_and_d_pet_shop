@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "pet show page favorites" do
+RSpec.describe "remove favorites" do
   context "as a visitor" do
     before(:each) do
       @shelter1 = Shelter.create(name: "Randys Rodent Ranch", address: "555 Hamster Ave", city: "Richmond", state: "VA", zip: "12345")
@@ -16,7 +16,7 @@ RSpec.describe "pet show page favorites" do
                                   description: "Has a bad habit of digging holes")
     end
 
-    it "can remove pet from favorites" do
+    it "can remove pet from favorites from pet show page" do
 
       visit "/pets/#{@pet1.id}"
 
@@ -37,6 +37,27 @@ RSpec.describe "pet show page favorites" do
       expect(page).to have_content("#{@pet1.name} has been removed from your favorites!") 
       expect(page).to have_content("Favorites: 0") 
     end
+
+    it "can remove pet from favorites index page" do
+      
+      visit "/pets/#{@pet1.id}"
+
+      click_button "Add to your Favorites"
+
+      visit "/pets/#{@pet2.id}"
+
+      click_button "Add to your Favorites"
+
+      visit "/favorites"
+
+      within ".fav_pets-#{@pet1.id}" do 
+        click_link "Remove from Favorites"
+        expect(current_path).to eq("/favorites") 
+      end
+
+      expect(page).to have_no_content(@pet1.name) 
+    end
+    
   end
 end
 
