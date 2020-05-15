@@ -37,4 +37,5 @@ Rails.application.routes.draw do
 
   #adoptions
   get '/adoptions/new', to: 'adoptions#new'
+  post '/adoptions', to: 'adoptions#create'
 end

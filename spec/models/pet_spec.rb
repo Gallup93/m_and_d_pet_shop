@@ -12,7 +12,6 @@ RSpec.describe Pet, type: :model do
         it { should have_many :adoption_pets}
         it { should have_many(:adoptions).through(:adoption_pets)}
     end
-<<<<<<< HEAD
     #need to add second expectation once adoption stauts can be changed
     describe "#adoptable?" do
         it "can return pets adoption status as string" do
@@ -33,6 +32,3 @@ RSpec.describe Pet, type: :model do
     
     
 end
-=======
-end
->>>>>>> mg_apply
