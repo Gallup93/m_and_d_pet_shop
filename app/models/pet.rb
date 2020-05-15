@@ -3,7 +3,6 @@ class Pet < ApplicationRecord
     validates :adoption_status, inclusion: [true, false]
     belongs_to :shelter
 
-    #pair on fixing this per Mikes comments
     def adoptable?
         adoption_status ? "Adoptable" : "Pending Adoption"
     end

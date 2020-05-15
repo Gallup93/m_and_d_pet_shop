@@ -3,7 +3,6 @@ class Shelter < ApplicationRecord
     has_many :pets, dependent: :destroy
     has_many :reviews
 
-    #need to add model test
     def pet_count
         pets.count
     end

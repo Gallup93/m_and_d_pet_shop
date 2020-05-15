@@ -24,6 +24,10 @@ Rails.application.routes.draw do
   #favorites
   get '/favorites', to: 'favorites#index'
   patch '/favorites/:pet_id', to: 'favorites#update'
+  delete '/favorites/:pet_id', to: 'favorites#destroy'
+  delete '/favorites/:pet_id/from_index', to: 'favorites#destroy_from_index'
+  delete '/favorites', to: 'favorites#destroy_all'
+
   #reviews
   get '/shelters/:id/reviews/new', to: 'reviews#new'
   # get '/shelters/:id/reviews', to: 'reviews#new'

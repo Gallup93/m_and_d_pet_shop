@@ -6,7 +6,9 @@
     <% favorites.contents.each do |pet| %>
       <section class= "fav_pets-<%= pet %>"> 
         <h3><%= link_to favorites.find_fav_pet(pet).name, "/pets/#{favorites.find_fav_pet(pet).id}" %></h3>
-        <img style="width:40vw" src="<%= favorites.find_fav_pet(pet).image %>"><hr>
+        <img style="width:40vw" src="<%= favorites.find_fav_pet(pet).image %>">
+        <%= link_to "Remove from Favorites", "/favorites/#{favorites.find_fav_pet(pet).id}/from_index", method: :delete %><hr>
       </section>
     <% end %>
   <% end %>
+  <h3><%= link_to "Clear All Favorites", "/favorites", method: :delete %></h3>

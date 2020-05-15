@@ -21,12 +21,13 @@ RSpec.describe Favorites do
 
       expect(subject.total_count).to eq(2) 
     end
+  end
 
   describe "#add_pet" do
     it "can add a pet to its contents" do
       subject.add_pet(@pet1.id)
       subject.add_pet(@pet2.id)
-    # binding.pry
+
       expect(subject.contents).to eq([@pet1.id.to_s, @pet2.id.to_s]) 
     end
   end
@@ -36,8 +37,26 @@ RSpec.describe Favorites do
       subject.add_pet(@pet1.id)
       subject.add_pet(@pet2.id)
       pet = subject.contents[0].to_i
+
       expect(subject.find_fav_pet(pet)).to eq(@pet1) 
     end
   end
+
+  describe "#delete_fav_pet" do
+    it "can delete a pet from favorites" do
+      subject.add_pet(@pet1.id)
+      subject.add_pet(@pet2.id)
+      subject.delete_fav_pet(@pet1.id)
+
+      expect(subject.contents).to eq([@pet2.id.to_s])
+    end
+  end
+
+  describe "#favorite?" do
+    it "can return if pet has been favorited" do
+      subject.add_pet(@pet1.id)
+      expect(subject.favorite?(@pet1.id)).to eq(true) 
+      expect(subject.favorite?(@pet2.id)).to eq(false) 
+    end
   end
 end
