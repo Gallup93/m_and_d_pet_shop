@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # require 'rails_helper'
 #
 # RSpec.describe "linked from /favorites to /favorites/apply" do
@@ -52,7 +52,6 @@
 #       expect(page).to have_content("#{@pet1.name}")
 #       expect(page).to_not have_content("#{@pet2.name}")
 #     end
-=======
 require 'rails_helper'
 
 RSpec.describe "linked from /favorites to /favorites/apply" do
@@ -115,7 +114,6 @@ RSpec.describe "linked from /favorites to /favorites/apply" do
     end
   end
 end
->>>>>>> mg_apply
 
     # it "cannot submit application without required forms filled" do
     #   expect(current_path).to eq("/favorites/apply")

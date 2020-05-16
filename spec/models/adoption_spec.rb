@@ -11,13 +11,9 @@ RSpec.describe Adoption, type: :model do
       it { should validate_presence_of(:description) }
   end
 
-<<<<<<< HEAD
-=======
   describe "relationships" do
     it { should have_many :adoption_pets}
     it { should have_many(:pets).through(:adoption_pets)}
   end
-
->>>>>>> mg_apply
   #should belong to pets?
 end
