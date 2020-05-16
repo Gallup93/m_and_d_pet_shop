@@ -66,7 +66,7 @@ RSpec.describe "linked from /favorites to /favorites/apply" do
                                   image: "https://images.freeimages.com/images/large-previews/4bc/rodent-1383599.jpg",
                                   age: 2,
                                   sex: "male")
-      @pet2 = @shelter2.pets.create(name: "Geraldo",
+      @pet2 = @shelter2.pets.create(name: "Hector",
                                   image: "https://images.freeimages.com/images/large-previews/790/turkey-1368576.jpg",
                                   age: 4,
                                   sex: "male")
@@ -93,16 +93,13 @@ RSpec.describe "linked from /favorites to /favorites/apply" do
         check "check_box[]"
         expect(page).to have_checked_field("check_box[]")
       end
-      save_and_open_page
-      #Test user can select the pets they wish (select_tag??)
-      #Select only pet2
 
       fill_in :name, with: "Hank Hill"
       fill_in :address, with: "23 Landry Blvd"
       fill_in :city, with: "Arlen"
       fill_in :state, with: "Texas"
       fill_in :zip, with: "23412"
-      fill_in :phone_number, with: "815-394-0850"
+      fill_in :phone, with: "815-394-0850"
       fill_in :description, with: "A good loving American home"
 
       click_button "Submit"

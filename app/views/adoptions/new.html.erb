@@ -1,1 +1,27 @@
 <h1> APPLY FOR YOUR FAVORITES </h1>
+
+<%= form_tag "/favorites" do %>
+  <p>Select Pet(s)</p>
+  <% favorites.all_favorites.each do |fav| %>
+    <section class="adoption_pet-<%= fav.id %>">
+      <%= check_box_tag "check_box[]", fav.id %>
+      <%= label_tag fav.name, fav.name %>
+    </section>
+  <% end %>
+  <p>Please fill out your information:</p>
+    <%= label_tag :name %>
+    <%= text_field_tag :name %>
+    <%= label_tag :address %>
+    <%= text_field_tag :address %>
+    <%= label_tag :city %>
+    <%= text_field_tag :city %>
+    <%= label_tag :state %>
+    <%= text_field_tag :state %>
+    <%= label_tag :zip %>
+    <%= number_field_tag :zip %>
+    <%= label_tag :phone %>
+    <%= number_field_tag :phone %>
+    <%= label_tag :description %>
+    <%= text_field_tag :description %>
+    <%= submit_tag "Submit" %>
+<% end %>

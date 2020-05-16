@@ -30,10 +30,4 @@ class FavoritesController < ApplicationController
     favorites.contents.clear
     redirect_to "/favorites"
   end
-  
-  
-  # def fav_collection
-
-  # end
-  
 end
