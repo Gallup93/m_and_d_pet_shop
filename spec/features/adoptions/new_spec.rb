@@ -31,8 +31,8 @@ RSpec.describe "linked from /favorites to /favorites/apply" do
 
       expect(current_path).to eq("/adoptions/new")
       within ".adoption_pet-#{@pet1.id}" do
-        check "check_box[]"
-        expect(page).to have_checked_field("check_box[]")
+        expect(page).to have_field('check_box[]', checked: false)
+        # expect(page).to have_checked_field("check_box[]")
       end
 
       within ".adoption_pet-#{@pet2.id}" do
