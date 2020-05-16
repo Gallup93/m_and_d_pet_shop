@@ -4,8 +4,11 @@ class AdoptionsController < ApplicationController
 
   def create
     # binding.pry
-    adoption = Adoption.create(adoption_params)
-    redirect_to '/favorites'
+    if Adoption.create(adoption_params)
+      flash[:notice] = "Application submitted!"
+      redirect_to '/favorites'
+    else
+    end
   end
 
   private
