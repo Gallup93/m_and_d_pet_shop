@@ -30,6 +30,7 @@ RSpec.describe "linked from /favorites to /favorites/apply" do
     it "can create a new application for selected favorite pets" do
 
       expect(current_path).to eq("/adoptions/new")
+
       within ".adoption_pet-#{@pet1.id}" do
         expect(page).to have_field('check_box[]', checked: false)
       end
@@ -55,56 +56,39 @@ RSpec.describe "linked from /favorites to /favorites/apply" do
       expect(page).to_not have_content("#{@pet2.name}")
     end
 
-    # it "cannot submit application without required forms filled" do
-    #   expect(current_path).to eq("/favorites/apply")
-    #   expect(page).to have_content("#{@pet1.name}")
-    #   expect(page).to have_content("#{@pet2.name}")
-    #
-    #   #SELECT PET
-    #
-    #   fill_in :name, with: "Hank Hill"
-    #   fill_in :address, with: "23 Landry Blvd"
-    #   #Leave 'city' blank
-    #   fill_in :state, with: "Texas"
-    #   fill_in :zip, with: "23412"
-    #   fill_in :phone_number, with: "815-394-0850"
-    #   fill_in :description, with: "A good loving American home"
-    #
-    #   click_button "Submit"
-    #
-    #   expect(current_path).to eq("/favorites/apply")
-    #   expect(page).to have_content("ERROR! Missing required form field(s)")
-    #
-    # end
+    it "cannot submit application without required forms filled" do
+      expect(current_path).to eq("/adoptions/new")
+
+      within ".adoption_pet-#{@pet2.id}" do
+        check "check_box[]"
+      end
+
+      fill_in :name, with: "Hank Hill"
+      fill_in :address, with: "23 Landry Blvd"
+      #Leave 'city' blank
+      fill_in :state, with: "Texas"
+      fill_in :zip, with: "23412"
+      fill_in :phone, with: "815-394-0850"
+      fill_in :description, with: "A good loving American home"
+
+      click_button "Submit"
+
+      expect(current_path).to eq("/adoptions/new")
+      expect(page).to have_content("ERROR! Missing required form field(s)")
+
+      #no favorite is selected
+      fill_in :name, with: "Hank Hill"
+      fill_in :address, with: "23 Landry Blvd"
+      fill_in :city, with: "Arlen"
+      fill_in :state, with: "Texas"
+      fill_in :zip, with: "23412"
+      fill_in :phone, with: "815-394-0850"
+      fill_in :description, with: "A good loving American home"
+
+      click_button "Submit"
+
+      expect(current_path).to eq("/adoptions/new")
+      expect(page).to have_content("ERROR! Missing required form field(s)")
+    end
   end
 end
-
-# User Story 16, Applying for a Pet
-#
-# When I select one or more pets, and fill in my **Need to assure atleast one fav is selected**
-# - Name
-# - Address
-# - City
-# - State
-# - Zip
-# - Phone Number
-# - Description of why I'd make a good home for this/these pet(s)
-# And I click on a button to submit my application
-# I see a flash message indicating my application went through for the pets that were selected
-# And I'm taken back to my favorites page where I no longer see the pets for which I just applied listed as favorites
-
-
-# User Story 17, Incomplete application for a Pet
-#
-# As a visitor
-# When I apply for a pet and fail to fill out any of the following:
-# - Name
-# - Address
-# - City
-# - State
-# - Zip
-# - Phone Number
-# - Description of why I'd make a good home for this/these pet(s)
-# And I click on a button to submit my application
-# I'm redirect back to the new application form to complete the necessary fields
-# And I see a flash message indicating that I must complete the form in order to submit the application
