@@ -32,7 +32,6 @@ RSpec.describe "linked from /favorites to /favorites/apply" do
       expect(current_path).to eq("/adoptions/new")
       within ".adoption_pet-#{@pet1.id}" do
         expect(page).to have_field('check_box[]', checked: false)
-        # expect(page).to have_checked_field("check_box[]")
       end
 
       within ".adoption_pet-#{@pet2.id}" do
@@ -55,8 +54,6 @@ RSpec.describe "linked from /favorites to /favorites/apply" do
       expect(page).to have_content("#{@pet1.name}")
       expect(page).to_not have_content("#{@pet2.name}")
     end
-  end
-end
 
     # it "cannot submit application without required forms filled" do
     #   expect(current_path).to eq("/favorites/apply")
@@ -79,18 +76,12 @@ end
     #   expect(page).to have_content("ERROR! Missing required form field(s)")
     #
     # end
-#   end
-# end
+  end
+end
 
 # User Story 16, Applying for a Pet
 #
-# As a visitor
-# When I have added pets to my favorites list
-# And I visit my favorites page ("/favorites")
-# I see a link for adopting my favorited pets
-# When I click that link I'm taken to a new application form
-# At the top of the form, I can select from the pets of which I've favorited for which I'd like this application to apply towards (can be more than one)
-# When I select one or more pets, and fill in my
+# When I select one or more pets, and fill in my **Need to assure atleast one fav is selected**
 # - Name
 # - Address
 # - City
