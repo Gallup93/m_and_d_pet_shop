@@ -20,10 +20,5 @@
     </section>
 <% end %>
     <%= yield %>
-    <% flash.each do |type, message| %>
-    <section class=<%= type %>>
-      <p><%= message %></p>
-    </section>
-    <% end %>
   </body>
 </html>

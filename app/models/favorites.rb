@@ -24,4 +24,11 @@ class Favorites
   def favorite?(pet_id)
     @contents.include?(pet_id.to_s)
   end
+
+  def all_favorites
+    @contents.map do |pet_id|
+      Pet.find(pet_id)
+    end
+  end
+  
 end
