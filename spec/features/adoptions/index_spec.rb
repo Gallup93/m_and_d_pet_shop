@@ -58,7 +58,7 @@
 #       fill_in :city, with: "Arlen"
 #       fill_in :state, with: "Texas"
 #       fill_in :zip, with: "23412"
-#       fill_in :phone, with: "815-394-0850"
+#       fill_in :phone, with: "815"
 #       fill_in :description, with: "A good loving American home"
 #
 #       click_button "Submit"
@@ -73,8 +73,17 @@
 #       click_link "Bobby Hill"
 #
 #       expect(current_path).to eq("/applications/#{Adoption.last.id}")
+#     end
 #
+#     it "displays message when no applications exist for the pet" do
+#       @pet2 = @shelter1.pets.create(name: "Hector",
+#                                   image: "https://images.freeimages.com/images/large-previews/790/turkey-1368576.jpg",
+#                                   age: 4,
+#                                   sex: "male")
 #
+#       visit "/pets/#{@pet2.id}"
+#
+#       expect(page).to have_content("no applications for this pet yet")
 #     end
 #   end
 # end
@@ -89,3 +98,11 @@
 # When I click that link
 # I can see a list of all the names of applicants for this pet
 # Each applicant's name is a link to their application show page
+
+# [ ] done
+#
+# User Story 21, Pet Applications Index Page When No Applications
+#
+# As a visitor
+# When I visit a pet applications index page for a pet that has no applications on them
+# I see a message saying that there are no applications for this pet yet

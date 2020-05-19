@@ -39,19 +39,19 @@
 #       fill_in :city, with: "Arlen"
 #       fill_in :state, with: "Texas"
 #       fill_in :zip, with: "23412"
-#       fill_in :phone, with: "815-394-0850"
+#       fill_in :phone, with: "815"
 #       fill_in :description, with: "A good loving American home"
 #
 #       click_button "Submit"
 #
-#       visit "/adoptions/#{Adoption.last.id}"
+#       visit "/applications/#{Adoption.last.id}"
 #
 #       expect(page).to have_content("Hank Hill")
 #       expect(page).to have_content("23 Landry Blvd")
 #       expect(page).to have_content("Arlen")
 #       expect(page).to have_content("Texas")
 #       expect(page).to have_content("23412")
-#       expect(page).to have_content("815-394-0850")
+#       expect(page).to have_content("815")
 #
 #       expect(page).to have_content("Pets being applied for:")
 #       expect(page).to have_link("#{@pet1.name}")

@@ -2,6 +2,10 @@ class AdoptionsController < ApplicationController
   def new
   end
 
+  # def show
+  #   @pets = Pet.all
+  # end
+
   def create
     application = Adoption.create(adoption_params)
 
