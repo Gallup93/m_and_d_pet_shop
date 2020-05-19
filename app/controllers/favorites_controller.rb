@@ -1,9 +1,9 @@
 class FavoritesController < ApplicationController
 
   def index
-    
+    # @pending_pets = Pet.all.find_all{|pet| pet.adoption_status == "false"}
   end
-  
+
 
   def update
     pet = Pet.find(params[:pet_id])
