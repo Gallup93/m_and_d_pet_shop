@@ -1,5 +1,9 @@
 <h1>Applications for <%= @pet.name %></h1>
 
-<% @pet.adoptions.each do |adopt| %>
-  <%= link_to "#{adopt.name}", "/adoptions/#{adopt.id}" %>
+<% if @pet.adoptions == [] %>
+  <h1>There are no applications for this pet</h1>
+<% else%>
+  <% @pet.adoptions.each do |adopt| %>
+    <%= link_to "#{adopt.name}", "/adoptions/#{adopt.id}" %>
+  <% end %>
 <% end %>

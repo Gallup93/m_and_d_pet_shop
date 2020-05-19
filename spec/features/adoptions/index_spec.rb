@@ -79,16 +79,14 @@ RSpec.describe "pet adoption index page" do
       expect(current_path).to eq("/adoptions/#{Adoption.last.id}")
     end
 
-    # it "displays message when no applications exist for the pet" do
-    #   @pet2 = @shelter1.pets.create(name: "Hector",
-    #                               image: "https://images.freeimages.com/images/large-previews/790/turkey-1368576.jpg",
-    #                               age: 4,
-    #                               sex: "male")
+    it "displays message when no applications exist for the pet" do
+      
+      visit "/pets/#{@pet2.id}"
 
-    #   visit "/pets/#{@pet2.id}"
-
-    #   expect(page).to have_content("no applications for this pet yet")
-    # end
+      click_link "See Current Applications"
+# binding.pry
+      expect(page).to have_content("There are no applications for this pet")
+    end
   end
 end
 
