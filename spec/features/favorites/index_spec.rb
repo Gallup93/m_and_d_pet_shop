@@ -9,7 +9,7 @@ RSpec.describe "favorites index page" do
                                     image: "https://images.freeimages.com/images/large-previews/4bc/rodent-1383599.jpg",
                                     age: 2,
                                     sex: "male")
-      @pet2 = @shelter2.pets.create(name: "Geraldo",
+      @pet2 = @shelter2.pets.create(name: "Susan",
       image: "https://images.freeimages.com/images/large-previews/790/turkey-1368576.jpg",
       age: 4,
       sex: "male")
@@ -67,13 +67,13 @@ RSpec.describe "favorites index page" do
       expect(current_path).to eq("/favorites")
 
       expect(page).to have_content("Pets with applications:")
-require "pry";binding.pry
-      # within ".pets_with_apps" do
+      # binding.pry
+      within ".pets_with_apps-#{@pet2.id}" do
 
         expect(page).to_not have_content("#{@pet1.name}")
         click_link "#{@pet2.name}"
-        expect(current_path).to eq("pets/#{@pet2.id}")
-      # end
+        expect(current_path).to eq("/pets/#{@pet2.id}")
+      end
     end
   end
 end

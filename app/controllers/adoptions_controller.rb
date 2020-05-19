@@ -7,7 +7,7 @@ class AdoptionsController < ApplicationController
   # end
 
   def create
-    application = Adoption.create!(adoption_params)
+    application = Adoption.create(adoption_params)
 
     if application.save && params[:check_box] != nil
       fav_ids = params[:check_box]
