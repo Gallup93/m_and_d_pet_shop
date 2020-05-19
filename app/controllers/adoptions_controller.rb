@@ -1,4 +1,9 @@
 class AdoptionsController < ApplicationController
+
+  def index
+    @pet = Pet.find(params[:pet_id])
+  end
+  
   def new
   end
 

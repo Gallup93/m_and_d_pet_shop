@@ -11,6 +11,7 @@
   <% else %>
 <%= button_to "Add to your Favorites", "/favorites/#{@pet.id}", method: :patch %><br>
 <% end %>
+<p><%= link_to "See Current Applications", "/pets/#{@pet.id})/adoptions" %>
 
 
 
