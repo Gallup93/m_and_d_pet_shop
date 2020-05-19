@@ -4,6 +4,8 @@
   <h1>There are no applications for this pet</h1>
 <% else%>
   <% @pet.adoptions.each do |adopt| %>
+  <section class="adoptions-<%= adopt.id %>">
     <%= link_to "#{adopt.name}", "/adoptions/#{adopt.id}" %>
   <% end %>
+  </section>
 <% end %>

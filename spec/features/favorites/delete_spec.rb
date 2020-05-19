@@ -26,8 +26,10 @@ RSpec.describe "remove favorites" do
 
       visit "/pets"
 
-      click_link "#{@pet1.name}"
-
+      within ".pet-#{@pet1.id}" do
+        click_link "#{@pet1.name}"
+      end
+      
       expect(page).to_not have_button("Add to your Favorites")
 
       click_button "Remove from Favorites"

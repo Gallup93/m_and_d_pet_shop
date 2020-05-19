@@ -2,35 +2,41 @@ require 'rails_helper'
 
 RSpec.describe "Application show page" do
   context "as a visitor" do
-    it "displays submitted form info" do
-      shelter1 = Shelter.create(name: "Randys Rodent Ranch", address: "555 Hamster Ave",
+    before(:each) do 
+      @shelter1 = Shelter.create(name: "Randys Rodent Ranch", address: "555 Hamster Ave",
                                 city: "Richmond", state: "VA", zip: "12345")
-      pet1 = shelter1.pets.create(name: "Geraldo",
+      @pet1 = @shelter1.pets.create(name: "Geraldo",
                                   image: "https://images.freeimages.com/images/large-previews/4bc/rodent-1383599.jpg",
                                   age: 2,
                                   sex: "male")
-      pet2 = shelter1.pets.create(name: "Hector",
+      @pet2 = @shelter1.pets.create(name: "Hector",
                                   image: "https://images.freeimages.com/images/large-previews/790/turkey-1368576.jpg",
                                   age: 4,
                                   sex: "male")
+      @adoption1 = Adoption.create(name: "Jo Bob", address: "123 Street", city: "Toronto", state: "AK", zip: 3, phone: 9, description: "hlkjkl")
+      @adoption_pet1 = AdoptionPet.create(pet_id: @pet1.id, adoption_id: @adoption1.id)
+      
+    end
 
-      visit "/pets/#{pet1.id}"
+    it "displays submitted form info" do
+
+      visit "/pets/#{@pet1.id}"
       click_button "Add to your Favorites"
-      visit "/pets/#{pet2.id}"
+      visit "/pets/#{@pet2.id}"
       click_button "Add to your Favorites"
 
       visit "/favorites"
 
       click_link "Apply Now!"
 
-      within ".adoption_pet-#{pet1.id}" do
+      within ".adoption_pet-#{@pet1.id}" do
         expect(page).to have_field('check_box[]', checked: false)
       end
 
-      within ".adoption_pet-#{pet1.id}" do
+      within ".adoption_pet-#{@pet1.id}" do
         check "check_box[]"
       end
-      within ".adoption_pet-#{pet2.id}" do
+      within ".adoption_pet-#{@pet2.id}" do
         check "check_box[]"
       end
 
@@ -54,9 +60,25 @@ RSpec.describe "Application show page" do
       # expect(page).to have_content("815")
 
       expect(page).to have_content("Pets being applied for:")
-      expect(page).to have_link("#{pet1.name}")
-      click_link "#{pet2.name}"
-      expect(current_path).to eq("/pets/#{pet2.id}")
+      expect(page).to have_link("#{@pet1.name}")
+      click_link "#{@pet2.name}"
+      expect(current_path).to eq("/pets/#{@pet2.id}")
+    end
+
+    it "can approve a pet application" do
+
+      visit "/adoptions/#{@adoption1.id}"
+
+      within ".approvals-#{@pet1.id}" do
+        click_link "Approve Adoption"
+      end
+
+      expect(current_path).to eq("/pets/#{@pet1.id}") 
+      @pet1.reload
+      expect(@pet1.adoption_status).to eq(false) 
+      expect(page).to have_content("Pending Adoption") 
+      # save_and_open_page
+      expect(page).to have_link("#{@pet1.name} is on hold for Hank Hill") 
     end
   end
 end

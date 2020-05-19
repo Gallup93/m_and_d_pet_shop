@@ -30,9 +30,21 @@ class AdoptionsController < ApplicationController
     end
   end
 
+  def approvals
+    pet = Pet.find(params[:pet_id])
+    pet.update(adoption_status: false)
+    redirect_to "/pets/#{pet.id}"
+  end
+  
+
   private
 
   def adoption_params
     params.permit(:name, :address, :city, :state, :zip, :phone, :description)
   end
+
+  def pet_status_params
+    params.permit(:adoption_status)
+  end
+  
 end

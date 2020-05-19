@@ -1,4 +1,4 @@
-<h1>Application info for <%= @app.name  %></h1>
+<h1>Application info for <%= @app.name %></h1>
 
 <p>Address: <%= @app.address %></p>
 <p>City: <%= @app.city %></p>
@@ -9,5 +9,8 @@
 
 <h3>Pets being applied for:</h3>
 <% @app.pets.each do |pet| %>
+  <section class="approvals-<%= pet.id %>">
   <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></p>
+  <p><%= link_to "Approve Adoption", "/pets/#{pet.id}/adoptions/#{@app.id}", method: :patch %></p>
+  </section>
   <% end %>
