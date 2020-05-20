@@ -32,5 +32,30 @@ RSpec.describe "pet edit page" do
         expect(subject).to_not have_content(2) 
         expect(subject).to_not have_content("male") 
     end
+
+    it "will return error message if missing fields" do
+
+        shelter1 = Shelter.create(name: "Randys Rodent Ranch", address: "555 Hamster Ave", city: "Richmond", state: "VA", zip: "12345")
+        pet1 = shelter1.pets.create(name: "Geraldo", 
+                                    image: "https://images.freeimages.com/images/large-previews/4bc/rodent-1383599.jpg", 
+                                    age: 2,
+                                    sex: "male")
+
+        visit "/pets/#{pet1.id}"
+
+        click_link "Update Pet Info"
+
+        expect(current_path).to eq("/pets/#{pet1.id}/edit") 
+
+        fill_in :name,	with: "Francine" 
+        fill_in :age,	with: 3 
+        fill_in :sex,	with: "" 
+
+        click_button "Update Pet"
+
+        expect(current_path).to eq("/pets/#{pet1.id}/edit") 
+
+        expect(page).to have_content("Sex can't be blank") 
+    end
   end
 end
