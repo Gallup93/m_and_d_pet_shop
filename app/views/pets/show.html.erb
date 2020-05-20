@@ -3,7 +3,8 @@
 <p>Age: <%= @pet.age %></p><br>
 <p>Description: <%= @pet.description %></p><br>
 <p>Sex: <%= @pet.sex %></p><br>
-<p>Adoption Status: <%= @pet.adoptable? %></p><br>
+<p>Adoption Status: <%= @pet.adoptable? %></p>
+
 <%= link_to 'Update Pet Info', "/pets/#{@pet.id}/edit" %><br>
 <%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete %><br>
 <% if favorites.favorite?(@pet.id) %>
@@ -11,6 +12,4 @@
   <% else %>
 <%= button_to "Add to your Favorites", "/favorites/#{@pet.id}", method: :patch %><br>
 <% end %>
-
-
-
+<p><%= link_to "See Current Applications", "/pets/#{@pet.id})/adoptions" %>
