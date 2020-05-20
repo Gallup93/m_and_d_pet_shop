@@ -80,22 +80,47 @@ RSpec.describe "Application show page" do
       save_and_open_page
       expect(page).to have_link("#{@pet1.name} is on hold for Jo Bob")
     end
+
+    # it "can approve multiple pet apps at once" do
+    #   visit "/pets/#{@pet1.id}"
+    #   click_button "Add to your Favorites"
+    #   visit "/pets/#{@pet2.id}"
+    #   click_button "Add to your Favorites"
+    #
+    #   visit "/favorites"
+    #
+    #   click_link "Apply Now!"
+    #
+    #   within ".adoption_pet-#{@pet1.id}" do
+    #     check "check_box[]"
+    #   end
+    #
+    #   within ".adoption_pet-#{@pet2.id}" do
+    #     check "check_box[]"
+    #   end
+    #
+    #   fill_in :name, with: "Hank Hill"
+    #   fill_in :address, with: "23 Landry Blvd"
+    #   fill_in :city, with: "Arlen"
+    #   fill_in :state, with: "Texas"
+    #   fill_in :zip, with: 1
+    #   fill_in :phone, with: 2
+    #   fill_in :description, with: "A good loving American home"
+    #
+    #   click_button "Submit"
+    #
+    #   visit "/adoptions/#{Adoption.last.id}"
+    #
+    #   within ".approvals-#{@pet1.id}" do
+    #     check "check_box[]"
+    #   end
+    #
+    #   within ".approvals-#{@pet2.id}" do
+    #     check "check_box[]"
+    #   end
+    #
+    #   click_button "Approve Adoptions"
+    # end
+
   end
 end
-
-
-# [ ] done
-
-# User Story 19, Application Show Page
-
-# As a visitor
-# When I visit an applications show page "/applications/:id"
-# I can see the following:
-# - name
-# - address
-# - city
-# - state
-# - zip
-# - phone number
-# - Description of why the applicant says they'd be a good home for this pet(s)
-# - names of all pet's that this application is for (all names of pets should be links to their show page)
