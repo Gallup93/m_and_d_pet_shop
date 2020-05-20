@@ -36,10 +36,25 @@ RSpec.describe "shelter delete page" do
       visit "/shelters/#{shelter1.id}"
 
       click_link "Delete Shelter"
-
-      expect(current_path).to eq("/shelters/#{shelter1.id}") 
       expect(page).to have_content("Cannot delete this shelter with pets that pending adoptions!") 
+      expect(current_path).to eq("/shelters/#{shelter1.id}") 
     end
-    
+
+    it "deleting a shelter removes it reviews" do
+
+      shelter1 = Shelter.create(name: "Randys Rodent Ranch", address: "555 Hamster Ave", city: "Richmond", state: "VA", zip: "12345")
+      review1 = shelter1.reviews.create(title: "Bad Store", 
+                                        rating: 1, 
+                                        content: "stole my money",
+                                        image: "https://images.freeimages.com/images/large-previews/3d7/stubbed-toe-or-forgotten-briefcase-1194346.jpg") 
+
+      visit "/shelters/#{shelter1.id}"
+
+      click_link "Delete Shelter"
+
+      expect(current_path).to eq("/shelters") 
+
+      expect(page).to_not have_content("Bad Store") 
+    end
   end
 end
