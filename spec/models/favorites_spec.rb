@@ -59,4 +59,12 @@ RSpec.describe Favorites do
       expect(subject.favorite?(@pet2.id)).to eq(false) 
     end
   end
+
+  describe "#all_favorites" do
+    it "can return if pet has been favorited" do
+      subject.add_pet(@pet1.id)
+      subject.add_pet(@pet2.id)
+      expect(subject.all_favorites).to eq([@pet1, @pet2])
+    end
+  end
 end

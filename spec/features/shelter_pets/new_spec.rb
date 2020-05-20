@@ -40,5 +40,31 @@ RSpec.describe "shelter pets index page" do
         expect(page).to have_content(pet1.name) 
         expect(page).to have_content(pet1.adoptable?) 
     end
+    it "will return error message if missing fields" do
+
+        shelter1 = Shelter.create(name: "Randys Rodent Ranch", address: "555 Hamster Ave", city: "Richmond", state: "VA", zip: "12345")
+
+        visit "/shelters/#{shelter1.id}"
+
+        click_link "View Available Pets"
+
+        expect(current_path).to eq("/shelters/#{shelter1.id}/pets")
+        
+        click_link "Add New Pet"
+
+        expect(current_path).to eq("/shelters/#{shelter1.id}/pets/new") 
+
+        fill_in :name,	with: "Puppy" 
+        fill_in :image,	with: "https://images.freeimages.com/images/large-previews/63d/dog-1383055.jpg"
+        fill_in :age,	with: 1
+        fill_in :sex,	with: "" 
+        fill_in :description,	with: "fun" 
+
+        click_button "Create Pet"
+
+        expect(current_path).to eq("/shelters/#{shelter1.id}/pets/new") 
+
+        expect(page).to have_content("Sex can't be blank") 
+    end
   end
 end
