@@ -14,4 +14,12 @@
       </section>
     <% end %>
     <h3><%= link_to "Clear All Favorites", "/favorites", method: :delete %></h3>
+      <h3>Pets with applications:</h3>
+      <% @pets.each do |pet| %>
+    <section class= "pets_with_apps-<%= pet.id %>">
+      <% if pet.adoptions.count > 0 %>
+      <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+      <% end%>
+    </section>
+    <% end%>
   <% end %>

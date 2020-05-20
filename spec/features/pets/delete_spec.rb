@@ -16,7 +16,7 @@ RSpec.describe "pet delete page" do
 
         expect(current_path).to eq("/pets") 
 
-        expect(page).to_not have_content("Geraldo")
+        expect(page).to_not have_content(pet1.name)
         expect(page).to_not have_css("img[src*='https://images.freeimages.com/images/large-previews/4bc/rodent-1383599.jpg']") 
     end
   end
