@@ -77,50 +77,68 @@ RSpec.describe "Application show page" do
       @pet1.reload
       expect(@pet1.adoption_status).to eq(false)
       expect(page).to have_content("Adoption Status: Pending Adoption")
-      save_and_open_page
-      expect(page).to have_link("#{@pet1.name} is on hold for Jo Bob")
     end
 
-    # it "can approve multiple pet apps at once" do
-    #   visit "/pets/#{@pet1.id}"
-    #   click_button "Add to your Favorites"
-    #   visit "/pets/#{@pet2.id}"
-    #   click_button "Add to your Favorites"
-    #
-    #   visit "/favorites"
-    #
-    #   click_link "Apply Now!"
-    #
-    #   within ".adoption_pet-#{@pet1.id}" do
-    #     check "check_box[]"
-    #   end
-    #
-    #   within ".adoption_pet-#{@pet2.id}" do
-    #     check "check_box[]"
-    #   end
-    #
-    #   fill_in :name, with: "Hank Hill"
-    #   fill_in :address, with: "23 Landry Blvd"
-    #   fill_in :city, with: "Arlen"
-    #   fill_in :state, with: "Texas"
-    #   fill_in :zip, with: 1
-    #   fill_in :phone, with: 2
-    #   fill_in :description, with: "A good loving American home"
-    #
-    #   click_button "Submit"
-    #
-    #   visit "/adoptions/#{Adoption.last.id}"
-    #
-    #   within ".approvals-#{@pet1.id}" do
-    #     check "check_box[]"
-    #   end
-    #
-    #   within ".approvals-#{@pet2.id}" do
-    #     check "check_box[]"
-    #   end
-    #
-    #   click_button "Approve Adoptions"
-    # end
+    it "can only have one approved application on a pet at a time" do
+      visit "/pets/#{@pet1.id}"
+      click_button "Add to your Favorites"
+      visit "/favorites"
+      click_link "Apply Now!"
 
+      within ".adoption_pet-#{@pet1.id}" do
+        check "check_box[]"
+      end
+
+      fill_in :name, with: "Hank Hill"
+      fill_in :address, with: "23 Landry Blvd"
+      fill_in :city, with: "Arlen"
+      fill_in :state, with: "Texas"
+      fill_in :zip, with: 1
+      fill_in :phone, with: 2
+      fill_in :description, with: "A good loving American home"
+
+      click_button "Submit"
+
+      id1 = Adoption.last.id
+
+      visit "/pets/#{@pet1.id}"
+      click_button "Add to your Favorites"
+      visit "/favorites"
+      click_link "Apply Now!"
+
+      within ".adoption_pet-#{@pet1.id}" do
+        check "check_box[]"
+      end
+
+      fill_in :name, with: "Dale Gribble"
+      fill_in :address, with: "25 Alamo St"
+      fill_in :city, with: "Arlen"
+      fill_in :state, with: "Texas"
+      fill_in :zip, with: 4
+      fill_in :phone, with: 5
+      fill_in :description, with: "Donjddu"
+
+      click_button "Submit"
+
+      id2 = Adoption.last.id
+
+      visit "/adoptions/#{id1}"
+
+      within ".approvals-#{@pet1.id}" do
+        click_link "Approve Adoption"
+      end
+
+      visit "/adoptions/#{id2}"
+
+      within ".approvals-#{@pet1.id}" do
+        expect(page).to_not have_link("Approve Adoption")
+        click_link "Revoke Adoption"
+      end
+      @pet1.reload
+      expect(current_path).to eq("/adoptions/#{id2}")
+      expect(page).to have_content("Approve Adoption")
+      visit "/pets/#{@pet1.id}"
+      expect(page).to have_content("Adoptable")
+    end
   end
 end

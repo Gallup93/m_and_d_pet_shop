@@ -3,7 +3,7 @@ class AdoptionsController < ApplicationController
   def index
     @pet = Pet.find(params[:pet_id])
   end
-  
+
   def new
   end
 
@@ -32,10 +32,21 @@ class AdoptionsController < ApplicationController
 
   def approvals
     pet = Pet.find(params[:pet_id])
+    adoption = Adoption.find(params[:adoption_id])
     pet.update(adoption_status: false)
+    flash[:notice] = "This pet is on hold for #{adoption.name}"
     redirect_to "/pets/#{pet.id}"
   end
-  
+
+  def revoke
+    pet = Pet.find(params[:pet_id])
+    adoption = Adoption.find(params[:id])
+    pet.update(adoption_status: true)
+    pet.save
+    # require "pry";binding.pry
+    redirect_to "/adoptions/#{adoption.id}"
+  end
+
 
   private
 
@@ -46,5 +57,5 @@ class AdoptionsController < ApplicationController
   def pet_status_params
     params.permit(:adoption_status)
   end
-  
+
 end

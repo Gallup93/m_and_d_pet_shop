@@ -11,6 +11,10 @@
 <% @app.pets.each do |pet| %>
   <section class="approvals-<%= pet.id %>">
   <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></p>
-  <p><%= link_to "Approve Adoption", "/pets/#{pet.id}/adoptions/#{@app.id}", method: :patch %></p>
-  </section>
+  <% if pet.adoption_status == true %>
+    <p><%= link_to "Approve Adoption", "/pets/#{pet.id}/adoptions/#{@app.id}", method: :patch %></p>
+  <% else %>
+    <p><%= link_to "Revoke Adoption", "/adoptions/#{@app.id}/#{pet.id}", method: :patch %></p>
   <% end %>
+  </section>
+<% end %>

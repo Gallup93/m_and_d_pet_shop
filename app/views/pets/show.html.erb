@@ -4,11 +4,7 @@
 <p>Description: <%= @pet.description %></p><br>
 <p>Sex: <%= @pet.sex %></p><br>
 <p>Adoption Status: <%= @pet.adoptable? %></p>
-<% if @pet.adoptable? == "Pending Adoption" %>
-    <% @pet.adoptions.each do |adopt| %>
-      <%= link_to "#{@pet.name} is on hold for #{adopt.name}", "/adoptions/#{adopt.id}" %>
-  <% end %>
-<% end %><br>
+
 <%= link_to 'Update Pet Info', "/pets/#{@pet.id}/edit" %><br>
 <%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete %><br>
 <% if favorites.favorite?(@pet.id) %>
