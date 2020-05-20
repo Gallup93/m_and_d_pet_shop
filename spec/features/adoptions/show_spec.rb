@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Application show page" do
   context "as a visitor" do
-    before(:each) do 
+    before(:each) do
       @shelter1 = Shelter.create(name: "Randys Rodent Ranch", address: "555 Hamster Ave",
                                 city: "Richmond", state: "VA", zip: "12345")
       @pet1 = @shelter1.pets.create(name: "Geraldo",
@@ -15,7 +15,7 @@ RSpec.describe "Application show page" do
                                   sex: "male")
       @adoption1 = Adoption.create(name: "Jo Bob", address: "123 Street", city: "Toronto", state: "AK", zip: 3, phone: 9, description: "hlkjkl")
       @adoption_pet1 = AdoptionPet.create(pet_id: @pet1.id, adoption_id: @adoption1.id)
-      
+
     end
 
     it "displays submitted form info" do
@@ -73,12 +73,12 @@ RSpec.describe "Application show page" do
         click_link "Approve Adoption"
       end
 
-      expect(current_path).to eq("/pets/#{@pet1.id}") 
+      expect(current_path).to eq("/pets/#{@pet1.id}")
       @pet1.reload
-      expect(@pet1.adoption_status).to eq(false) 
-      expect(page).to have_content("Pending Adoption") 
-      # save_and_open_page
-      expect(page).to have_link("#{@pet1.name} is on hold for Hank Hill") 
+      expect(@pet1.adoption_status).to eq(false)
+      expect(page).to have_content("Adoption Status: Pending Adoption")
+      save_and_open_page
+      expect(page).to have_link("#{@pet1.name} is on hold for Jo Bob")
     end
   end
 end
