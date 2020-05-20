@@ -63,5 +63,29 @@ RSpec.describe "pet delete page" do
         expect(page).to_not have_content("Delete Pet")
       end
     end
+
+    it "removes deleted pet from favorites" do
+      shelter1 = Shelter.create(name: "Randys Rodent Ranch", address: "555 Hamster Ave", city: "Richmond", state: "VA", zip: "12345")
+      pet1 = shelter1.pets.create(name: "Geraldo",
+                                  image: "https://images.freeimages.com/images/large-previews/4bc/rodent-1383599.jpg",
+                                  age: 2,
+                                  sex: "male")
+
+      visit "/pets/#{pet1.id}"
+
+      click_button "Add to your Favorites"
+
+      visit "/favorites"
+
+      expect(page).to have_content("#{pet1.name}")
+
+      visit "/pets/#{pet1.id}"
+
+      click_link "Delete Pet"
+
+      visit "/favorites"
+
+      expect(page).to_not have_content("#{pet1.name}")
+    end
   end
 end
